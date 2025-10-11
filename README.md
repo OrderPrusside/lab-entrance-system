@@ -1,7 +1,8 @@
 This repository is for the Lab's entry management system.
-If you are a member of the lab, you are welcome to contribute.
+You are welcome to contribute.
 
 This system is built with Google Apps Script (GAS).
+This is Container Bind Script. 
 
 It was inspired by:
 https://qiita.com/t-morik/items/a6c73e5aff17a52cc104
