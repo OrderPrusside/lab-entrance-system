@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_top">
+    <title>ACCESS MANAGEMENT SYSTEM</title>
+ 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- fontawesome　-->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+ 
+  </head>
+  <body>
+
+ 
+    <div class="container">
+      <div class="row align-items-center" style="height:8rem;">
+      </div>   
+      <div class="border-bottom mx-auto" style="max-width: 25rem;">
+        <div class="text-center"><h5>現在の在室人数</h5></div>
+        <div class="text-center"><h6><?= room ?></h6></div>
+        <div class="text-center"><span id="view_clock"></span></div>
+      </div>
+      <div class="list-inline text-center">
+        <i class="list-inline-item fas fa-users fa-4x"></i>
+        <!---><h1 class="list-inline-item text-danger display-1 "><?= num ?></h1><--->
+        <h1 class="list-inline-item text-danger display-1 "><span id="number_people"></span></h1>
+        <h5 class="list-inline-item text-muted small"> 名</h5>
+      </div>
+      <br/>
+      <div class="mx-auto" style="max-width: 30rem;">
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-body text-light bg-info text-center">
+              <a class="text-light" href="<?= url ?>?p=in">
+              <i class="fa fa-sign-in-alt fa-2x"></i>&nbsp;入室</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-light bg-secondary text-center">
+              <a class="text-light" href="<?= url ?>?p=preout">
+              <i class="fas fa-sign-out-alt fa-2x"></i>&nbsp;退室</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-light text-center mt-3"> <!-- mt-3 で上に少しマージンを追加 -->
+        <a class="btn btn-primary btn-lg" href="<?= url ?>?p=member" >メンバーと在室状態 </a>
+        <br/>
+        <p class="text-muted small text-center mt-1">あなたは以下の名前でログイン中: <?= name ?></p>
+      </div>
+    </div><!-- /.container -->
+    
+<!-- javascript -->
+<script type="text/javascript">
+var timerIDClock; // 時計用のタイマーID
+var timerIDNum;   // 人数取得用のタイマーID
+var num = <?= num ?>;
+document.getElementById("number_people").innerHTML = num;//初期
+
+
+// ページ読み込み完了後に実行
+window.addEventListener('load', function() {
+  // 初期表示
+  updateClock();
+  fetchAndUpdateNumber(); // 初回の人数取得
+
+  // 定期実行の設定
+  timerIDClock = setInterval(updateClock, 500); // 0.5秒ごとに時計更新
+  timerIDNum = setInterval(fetchAndUpdateNumber, 5000); // 5秒ごとに人数をサーバーに問い合わせる (0.5秒は頻繁すぎます)
+});
+
+// 時計表示を更新する関数
+function updateClock() {
+	document.getElementById("view_clock").innerHTML = getNow();
+}
+
+// サーバーから最新の人数を取得して表示を更新する関数
+function fetchAndUpdateNumber() {
+  google.script.run
+    .withSuccessHandler(onSuccess_getNumberOfPeople) // 成功時に呼び出す関数
+    .withFailureHandler(onFailure_getNumberOfPeople) // 失敗時に呼び出す関数
+    .getCurrentNumberOfPeople(); // .gsファイルの関数を呼び出す
+}
+
+// 人数取得成功時の処理
+function onSuccess_getNumberOfPeople(num) {
+  console.log("人数取得成功:", num);
+  document.getElementById("number_people").innerHTML = num;
+}
+
+// 人数取得失敗時の処理
+function onFailure_getNumberOfPeople(error) {
+  console.error("人数取得エラー:", error);
+  document.getElementById("number_people").innerHTML = "?"; // エラー表示
+}
+
+
+function getNow() {
+	var now = new Date();
+	var year = now.getFullYear();
+	var mon = now.getMonth()+1; //１を足すこと
+	var day = now.getDate();
+	var hour = now.getHours();
+	var min = now.getMinutes();
+	var sec = now.getSeconds();
+
+	//出力用
+  var s = year + "年" + mon + "月" + day + "日&nbsp;" + hour + "時" + min + "分" + sec + "秒"; 
+	return s;
+}
+</script>
+  </body>
+</html>

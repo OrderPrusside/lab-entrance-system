@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_top">
+    <title>ACCESS MANAGEMENT SYSTEM</title>
+ 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- fontawesome　-->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+ 
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row align-items-center" style="height:10rem">
+      </div>   
+      <div class="mx-auto" style="max-width: 30rem;">    
+        <a class="text-dark text-center" href="<?= url ?>?p=index">
+        <i class="fas fa-backspace fa-2x"></i>&nbsp;戻る</a>      
+      </div>
+      <br>
+      <div class="mx-auto" style="max-width: 30rem;">
+        <div class="card">
+          <div class="card-footer text-light bg-primary text-center">
+            <a class="text-light">
+            <i class="fas fa-spinner fa-spin fa-2x"></i> <!-- 回転するスピナーアイコン -->
+            </a>
+            <!-- 他の回転アイコン例 -->
+            <!-- <i class="fas fa-sync-alt fa-spin fa-2x"></i> -->
+            <!-- <i class="fas fa-circle-notch fa-spin fa-2x"></i> -->
+          </div>
+        </div>
+        <br>
+        <div class="text-center"><p class="mb-1">退室処理中です</p></div>
+        <div class="text-center"><h4 class="mb-3">これからの予定を教えてください &nbsp;<i class="fas fa-calendar-alt"></i></h4></div>
+        <div class="text-center mb-3 mx-auto" style="max-width: 30rem;">
+          <a href="<?= url ?>?p=out_home" class="btn btn-primary btn-sm m-1">帰宅 &nbsp;<i class="fas fa-home"></i></a>
+          <a href="<?= url ?>?p=out_class" class="btn btn-secondary btn-sm m-1">講義 &nbsp;<i class="fas fa-book"></i></a>
+          <a href="<?= url ?>?p=out_univ" class="btn btn-info btn-sm m-1">学内外出(講義以外) &nbsp;<i class="fas fa-utensils"></i></a>
+          <a href="<?= url ?>?p=out_investigate" class="btn btn-warning btn-sm m-1">学外外出(調査)&nbsp;<i class="fas fa-car"></i></a>
+        </div>
+      </div>
+    </div><!-- /.container -->
+  </body>
+</html>
