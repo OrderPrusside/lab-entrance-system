@@ -1,4 +1,4 @@
-This repository is for the Lab's entry management system.
+This repository is for the my Lab's entry management system.
 You are welcome to contribute.
 
 This system is built with Google Apps Script (GAS).
