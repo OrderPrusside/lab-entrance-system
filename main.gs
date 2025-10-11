@@ -192,8 +192,3 @@ function getMemberData() {
     return []; // エラー時は空の配列を返す
   }
 }
-
-function testGetActiveSpreadsheet() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet();
-  Logger.log(sheet.getName())
-}
