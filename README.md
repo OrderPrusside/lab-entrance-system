@@ -1,4 +1,4 @@
-This repository is for the Hasegawa Lab's entry management system.
+This repository is for the Lab's entry management system.
 If you are a member of the lab, you are welcome to contribute.
 
 This system is built with Google Apps Script (GAS).
