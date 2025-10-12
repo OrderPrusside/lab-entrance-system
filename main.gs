@@ -36,7 +36,6 @@ function doGet(e){
     index.room=conf.roomName;
     var output = index.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else if(page =="in"){
     setStatus("IN")
@@ -44,7 +43,6 @@ function doGet(e){
     page_in.url=webAppUrl;
     var output = page_in.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else if(page =="member"){ 
     var template = HtmlService.createTemplateFromFile("member"); //member.htmlをオブジェクト化し変数宣言
@@ -52,14 +50,12 @@ function doGet(e){
     template.members = allData;  // 取得したデータ配列を 'members' という名前で渡す
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else if(page =="preout"){ 
     var template = HtmlService.createTemplateFromFile("preout");
     template.url = webAppUrl;
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else if(page =="out_home"){ 
     setStatus("HOME")
@@ -68,7 +64,6 @@ function doGet(e){
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
     kitaku_message_handler(activeuser,"HOME"); //本来は処理の最後に書くのがベスト
-    return output;
   }
   else if(page =="out_class"){ 
     setStatus("CLASS")
@@ -76,7 +71,6 @@ function doGet(e){
     template.url = webAppUrl; 
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else if(page =="out_univ"){ 
     setStatus("UNIV")
@@ -84,7 +78,6 @@ function doGet(e){
     template.url = webAppUrl; 
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else if(page =="out_investigate"){ 
     setStatus("INVEST")
@@ -92,14 +85,13 @@ function doGet(e){
     template.url = webAppUrl; 
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    return output;
   }
   else{
     var template = HtmlService.createTemplateFromFile("error")
     template.url = webAppUrl;
     var output = template.evaluate();
-    return output;
   }
+  return output;
 }
 
 function makeSessionEmail() {
