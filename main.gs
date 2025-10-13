@@ -63,7 +63,6 @@ function doGet(e){
     template.url = webAppUrl; 
     var output = template.evaluate();
     output.addMetaTag('viewport','width=device-width, initial-scale=1');
-    kitaku_message_handler(activeuser,"HOME"); //本来は処理の最後に書くのがベスト
   }
   else if(page =="out_class"){ 
     setStatus("CLASS")
@@ -91,6 +90,7 @@ function doGet(e){
     template.url = webAppUrl;
     var output = template.evaluate();
   }
+  kitaku_message_handler(activeuser,status);
   return output;
 }
 
