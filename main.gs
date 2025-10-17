@@ -90,7 +90,7 @@ function doGet(e){
     template.url = webAppUrl;
     var output = template.evaluate();
   }
-  if(typeof value != 'undefined'){
+  if(typeof status != 'undefined'){
     kitaku_message_handler(activeuser,status);
   }
   return output;
