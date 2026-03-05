@@ -1,11 +1,61 @@
-This repository is for the my Lab's entry management system.
-You are welcome to contribute.
+# Lab Entrance System (研究室入退室管理システム)
 
-This system is built with Google Apps Script (GAS).
-This is Container Bind Script. 
+Google Apps Script (GAS) と Google スプレッドシートを利用して構築された、研究室向けの入退室管理システムです。学生やメンバーが研究室に入退室する際の記録をスプレッドシートに保存し、同時にDiscordへ通知を送信します。
 
-It was inspired by:
-https://qiita.com/t-morik/items/a6c73e5aff17a52cc104
+## 概要 (Overview)
+本リポジトリは、研究室でのメンバーの在室状況や行き先を可視化・管理するためのWebアプリケーションです。GASの Container-Bound Script（スプレッドシートに紐づくスクリプト）として実装されており、サーバーレスで運用可能です。
 
-It is also based on the code from the link below, with some modifications.
-https://qiita.com/BruceWeyne/items/54cffecf338cc278523c
+## 主な機能 (Features)
+- **詳細なステータス管理**: 入室だけでなく、「帰宅」「授業」「学内」「調査」など、メンバーの行き先・状態を詳細に記録できます。
+- **Discord 自動通知**: ステータスが変更された際、指定したDiscordのチャンネルにWebHook経由で自動通知を送ります。
+- **Web UI**: スマホやPCのブラウザから直感的に操作できるシンプルなWeb画面（HTML/CSS/JS）。
+
+## ファイル構成 (Directory Structure)
+- `main.gs` : Webアプリのエントリーポイント（`doGet`, `doPost` など）
+- `Config.gs` : 設定情報の管理（スプレッドシート情報やDiscord Webhook URLなど）
+- `Database.gs` : スプレッドシートへのデータ読み書き処理
+- `DiscordWebHook.gs` : Discordへの通知処理
+- `Model.gs` : データ処理などのビジネスロジック
+- `*.html` : 各種画面のテンプレート
+  - `index.html` (トップ)
+  - `member.html` (メンバー選択)
+  - `in.html` (入室) / `preout.html` (退室選択)
+  - `out_*.html` (各種退室ステータス: 授業、帰宅、学内、調査など)
+  - `error.html` (エラー画面)
+
+## 導入手順 (Setup)
+
+このシステムは **Container-Bound Script（スプレッドシートに紐づくスクリプト）** として動作します。
+
+1. **Google スプレッドシートの作成**
+   - Googleドライブ上で新規にスプレッドシートを作成します。
+2. **GASエディタの起動**
+   - スプレッドシートのメニューから `拡張機能` > `Apps Script` を選択し、スクリプトエディタを開きます。
+3. **ファイルのアップロード**
+   - 本リポジトリの全ファイル（`.gs` および `.html`）をエディタ上に作成・ペーストしてください。
+4. **設定ファイルの編集**
+   - `Config.gs` を開き、DiscordのWebhook URLや、自身の環境に合わせた設定値に変更します。
+5. **Webアプリとしてデプロイ**
+   - GASエディタ右上の「デプロイ」>「新しいデプロイ」を選択。
+   - 種類: 「ウェブアプリ」
+   - アクセスできるユーザー: 「全員」または「Googleアカウントを持つ全員」等
+   - 設定後、「デプロイ」をクリックしてURLを発行します。
+6. **権限の承認**
+   - 初回アクセス・実行時にGoogleアカウントのアクセス権限承認が求められます。画面の指示に従い許可（Advanced > Go to [App Name]）してください。
+
+## 使い方 (Usage)
+1. デプロイ時に発行されたWebアプリのURLにアクセスします。
+2. メンバー選択画面から自分の名前を選択します。
+3. 現在の行動（入室・授業へ行く・帰宅など）を選択します。
+4. 完了画面が表示されると同時に、スプレッドシートへの記録とDiscordへの通知が実行されます。
+
+## 参考・謝辞 (References)
+本システムは、以下の記事および公開されているコードを参考に、一部改変を加えて作成されました。皆様の素晴らしいアイデアに感謝いたします。
+-[GASで研究室の入退室管理システムを作った話](https://qiita.com/t-morik/items/a6c73e5aff17a52cc104)
+-[GASで入退室管理システムを作成する](https://qiita.com/BruceWeyne/items/54cffecf338cc278523c)
+
+## コントリビュート (Contribution)
+機能追加やバグ修正など、皆様からの Issue や Pull Request を歓迎します。
+
+## ライセンス (License)
+このプロジェクトは [MIT License](LICENSE) のもとで公開されています。
